@@ -2,8 +2,6 @@
 
 A physical book reading experience built with vanilla HTML, CSS, and JavaScript — no frameworks, no build step, no runtime dependencies. The book contains a six-chapter essay on front-end development philosophy written for the project.
 
-**Lighthouse scores (local, cold cache):** Performance 100 · Accessibility 100 · Best Practices 100 · SEO 100
-
 ---
 
 ## What it does
