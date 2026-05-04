@@ -1,0 +1,265 @@
+/* ── Cover ── */
+.cover {
+  align-items: center;
+  block-size: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 2rem;
+  text-align: center;
+}
+
+.cover__ornament {
+  color: var(--cover-accent);
+  display: flex;
+  justify-content: center;
+  margin-block: 1.25rem;
+}
+
+.cover__title {
+  color: var(--cover-text);
+  font-family: var(--font-cover);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.cover__subtitle {
+  color: var(--cover-subtitle);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.cover__author {
+  color: var(--cover-accent);
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  margin-block-start: 2rem;
+  text-transform: uppercase;
+}
+
+.cover__year {
+  color: var(--cover-subtitle);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-style: italic;
+  margin-block-start: 0.4rem;
+  opacity: 0.65;
+}
+
+/* ── Frontispiece ── */
+.frontispiece {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding-block: 1rem;
+}
+
+.frontispiece__ornament {
+  color: var(--chapter-rule);
+  opacity: 0.75;
+}
+
+.frontispiece__epigraph {
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.85;
+  text-align: center;
+}
+
+.frontispiece__epigraph p {
+  color: var(--ink-secondary);
+}
+
+.frontispiece__epigraph footer {
+  margin-block-start: 1.25rem;
+}
+
+.frontispiece__epigraph cite {
+  color: var(--ink-muted);
+  font-size: 0.875rem;
+  font-style: normal;
+  letter-spacing: 0.02em;
+}
+
+/* ── Chapter ── */
+.chapter__header {
+  margin-block-end: 1.5rem;
+  text-align: center;
+}
+
+.chapter__num {
+  color: var(--ink-muted);
+  font-family: var(--font-display);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  margin-block-end: 0.75rem;
+  text-transform: uppercase;
+}
+
+.chapter__title {
+  color: var(--ink-secondary);
+  font-family: var(--font-display);
+  font-size: clamp(0.875rem, 2vw, 1.0625rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.chapter__rule {
+  background: linear-gradient(to right, transparent, var(--chapter-rule), transparent);
+  block-size: 1px;
+  inline-size: 60%;
+  margin-block-start: 1.25rem;
+  margin-inline: auto;
+}
+
+/* ── Chapter body text ── */
+.chapter__body {
+  font-size: clamp(0.9375rem, 1.5vw, 1rem);
+  line-height: 1.72;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.chapter__body p {
+  color: var(--ink-primary);
+  margin-block-end: 0.9em;
+}
+
+.chapter__body p:last-child {
+  margin-block-end: 0;
+}
+
+.chapter__body code {
+  background: rgb(26 22 16 / 7%);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  padding-block: 0.1em;
+  padding-inline: 0.35em;
+}
+
+/* ── Drop cap ── */
+.dropcap {
+  background-color: var(--dropcap-bg);
+  color: var(--dropcap-fg);
+  display: inline-block;
+  float: inline-start;
+  font-family: var(--font-display);
+  font-size: 3.1em;
+  font-weight: 600;
+  line-height: 0.82;
+  margin-block-end: 0.04em;
+  margin-inline-end: 0.14em;
+  padding-block: 0.11em;
+  padding-inline: 0.14em;
+}
+
+/* ── Colophon ── */
+.colophon {
+  block-size: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.colophon__heading,
+.author-note__heading {
+  color: var(--ink-secondary);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.colophon__rule,
+.author-note__rule {
+  background: linear-gradient(to right, transparent, var(--chapter-rule), transparent);
+  block-size: 1px;
+  inline-size: 50%;
+  margin-inline: auto;
+}
+
+.colophon__body,
+.author-note__body {
+  color: var(--ink-secondary);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.colophon__body p,
+/* stylelint-disable-next-line no-descending-specificity */
+.author-note__body p {
+  margin-block-end: 0.8em;
+}
+
+.colophon__body p:last-child,
+.author-note__body p:last-child {
+  margin-block-end: 0;
+}
+
+.colophon__body code,
+.author-note__body code {
+  background: rgb(26 22 16 / 7%);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  padding-block: 0.1em;
+  padding-inline: 0.3em;
+}
+
+.colophon__attribution {
+  color: var(--ink-muted);
+  font-size: 0.8125rem;
+  margin-block-start: auto;
+  text-align: center;
+}
+
+.colophon__year {
+  font-style: italic;
+  margin-block-start: 0.15rem;
+  opacity: 0.7;
+}
+
+.colophon__ornament {
+  color: var(--chapter-rule);
+  display: flex;
+  justify-content: center;
+  opacity: 0.6;
+}
+
+/* ── Author's Note ── */
+.author-note {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.author-note__ornament {
+  color: var(--chapter-rule);
+  display: flex;
+  justify-content: center;
+  opacity: 0.55;
+}
+
+.author-note__attribution {
+  color: var(--ink-muted);
+  font-size: 0.875rem;
+  font-style: italic;
+  text-align: center;
+}

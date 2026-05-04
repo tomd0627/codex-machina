@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Codex Machina — a physical book experience built with CSS 3D transforms and vanilla JavaScript. An essay on front-end development philosophy."
+    />
+    <title>Codex Machina</title>
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;600&family=Uncial+Antiqua&family=Inter:wght@400;500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;600&family=Uncial+Antiqua&family=Inter:wght@400;500&display=swap"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;600&family=Uncial+Antiqua&family=Inter:wght@400;500&display=swap"
+      />
+    </noscript>
+
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <a href="#book-controls" class="skip-link">Skip to navigation</a>
+
+    <main class="book-stage" id="book-stage">
+      <div class="book" id="book" role="region" aria-label="Codex Machina — interactive book">
+        <!-- Static left half: back cover / endpaper visible at spread 0 -->
+        <div class="book__back-cover" aria-hidden="true">
+          <div class="book__endpaper"></div>
+        </div>
+
+        <!-- Spine -->
+        <div class="book__spine" aria-hidden="true">
+          <span class="book__spine-title">Codex Machina</span>
+          <span class="book__spine-author">Tom DeLuca</span>
+        </div>
+
+        <!-- ============================================================
+             Page 0: Cover (front) / Frontispiece (back)
+             Initial state: data-state="recto" — cover visible on right
+        ============================================================ -->
+        <article
+          class="page"
+          id="page-0"
+          data-page="0"
+          data-state="recto"
+          aria-label="Cover — Codex Machina"
+          aria-hidden="false"
+        >
+          <div class="page__front page__front--cover">
+            <div class="page__content page__content--cover">
+              <header class="cover">
+                <div class="cover__ornament" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 120 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    width="120"
+                    height="12"
+                  >
+                    <line x1="0" y1="6" x2="46" y2="6" stroke="currentColor" stroke-width="0.75" />
+                    <circle
+                      cx="60"
+                      cy="6"
+                      r="4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="0.75"
+                    />
+                    <circle cx="60" cy="6" r="1.5" fill="currentColor" />
+                    <line
+                      x1="74"
+                      y1="6"
+                      x2="120"
+                      y2="6"
+                      stroke="currentColor"
+                      stroke-width="0.75"
+                    />
+                  </svg>
+                </div>
+                <h1 class="cover__title">Codex<br />Machina</h1>
+                <div class="cover__ornament" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 120 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    width="120"
+                    height="12"
+                  >
+                    <line x1="0" y1="6" x2="46" y2="6" stroke="currentColor" stroke-width="0.75" />
+                    <circle
+                      cx="60"
+                      cy="6"
+                      r="4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="0.75"
+                    />
+                    <circle cx="60" cy="6" r="1.5" fill="currentColor" />
+                    <line
+                      x1="74"
+                      y1="6"
+                      x2="120"
+                      y2="6"
+                      stroke="currentColor"
+                      stroke-width="0.75"
+                    />
+                  </svg>
+                </div>
+                <p class="cover__subtitle">A Treatise on<br />Front&#x2011;End Craft</p>
+                <p class="cover__author">Tom DeLuca</p>
+                <p class="cover__year">MMXXVI</p>
+              </header>
+            </div>
+          </div>
+
+          <div class="page__back" aria-hidden="true">
+            <div class="page__content page__content--frontispiece">
+              <div class="frontispiece">
+                <div class="frontispiece__ornament" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 80 80"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    width="80"
+                    height="80"
+                  >
+                    <circle
+                      cx="40"
+                      cy="40"
+                      r="35"
+                      stroke="currentColor"
+                      stroke-width="0.5"
+                      stroke-dasharray="2 4"
+                    />
+                    <circle cx="40" cy="40" r="27" stroke="currentColor" stroke-width="0.75" />
+                    <path d="M40 13 L43 37 L40 40 L37 37 Z" fill="currentColor" opacity="0.5" />
+                    <path d="M67 40 L43 43 L40 40 L43 37 Z" fill="currentColor" opacity="0.5" />
+                    <path d="M40 67 L37 43 L40 40 L43 43 Z" fill="currentColor" opacity="0.5" />
+                    <path d="M13 40 L37 37 L40 40 L37 43 Z" fill="currentColor" opacity="0.5" />
+                    <circle cx="40" cy="40" r="3" fill="currentColor" />
+                  </svg>
+                </div>
+                <blockquote class="frontispiece__epigraph">
+                  <p>
+                    &#x201C;The craft is not in the flourish.<br />
+                    The craft is in the joint<br />
+                    that will not show<br />
+                    until the furniture is old.&#x201D;
+                  </p>
+                  <footer>
+                    <cite>&#x2014; Attributed, anon., c.&#x202F;1889</cite>
+                  </footer>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============================================================
+             Page 1: Table of Contents (front) / Chapter I (back)
+        ============================================================ -->
+        <article
+          class="page"
+          id="page-1"
+          data-page="1"
+          aria-label="Pages 3&#x2013;4 — Table of Contents and Chapter I"
+          aria-hidden="true"
+          inert
+        >
+          <div class="page__front" aria-hidden="true">
+            <div class="page__content page__content--toc">
+              <nav class="toc" aria-label="Table of contents">
+                <h2 class="toc__heading">Contents</h2>
+                <div class="toc__rule" aria-hidden="true"></div>
+                <ol class="toc__list">
+                  <li class="toc__item">
+                    <a href="#chapter-i" class="toc__link" data-spread="2">
+                      <span class="toc__num">I.</span>
+                      <span class="toc__title">The Platform Is The Constraint</span>
+                      <span class="toc__dots" aria-hidden="true"></span>
+                      <span class="toc__folio">1</span>
+                    </a>
+                  </li>
+                  <li class="toc__item">
+                    <a href="#chapter-ii" class="toc__link" data-spread="2">
+                      <span class="toc__num">II.</span>
+                      <span class="toc__title">Accessibility Is Architecture, Not Audit</span>
+                      <span class="toc__dots" aria-hidden="true"></span>
+                      <span class="toc__folio">2</span>
+                    </a>
+                  </li>
+                  <li class="toc__item">
+                    <a href="#chapter-iii" class="toc__link" data-spread="3">
+                      <span class="toc__num">III.</span>
+                      <span class="toc__title">CSS Has A Cascade For A Reason</span>
+                      <span class="toc__dots" aria-hidden="true"></span>
+                      <span class="toc__folio">3</span>
+                    </a>
+                  </li>
+                  <li class="toc__item">
+                    <a href="#chapter-iv" class="toc__link" data-spread="3">
+                      <span class="toc__num">IV.</span>
+                      <span class="toc__title">JavaScript Is Load</span>
+                      <span class="toc__dots" aria-hidden="true"></span>
+                      <span class="toc__folio">4</span>
+                    </a>
+                  </li>
+                  <li class="toc__item">
+                    <a href="#chapter-v" class="toc__link" data-spread="4">
+                      <span class="toc__num">V.</span>
+                      <span class="toc__title">Performance Is A Feature For Someone Else</span>
+                      <span class="toc__dots" aria-hidden="true"></span>
+                      <span class="toc__folio">5</span>
+                    </a>
+                  </li>
+                  <li class="toc__item">
+                    <a href="#chapter-vi" class="toc__link" data-spread="4">
+                      <span class="toc__num">VI.</span>
+                      <span class="toc__title">Make It Boring</span>
+                      <span class="toc__dots" aria-hidden="true"></span>
+                      <span class="toc__folio">6</span>
+                    </a>
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+
+          <div class="page__back" aria-hidden="true">
+            <div
+              class="page__content"
+              id="chapter-i"
+              data-running-head="The Platform Is The Constraint"
+            >
+              <article class="chapter">
+                <header class="chapter__header">
+                  <p class="chapter__num">Chapter I</p>
+                  <h2 class="chapter__title">The Platform Is The Constraint</h2>
+                  <div class="chapter__rule" aria-hidden="true"></div>
+                </header>
+                <div class="chapter__body">
+                  <p>
+                    <span class="dropcap" aria-hidden="true">T</span
+                    ><span class="sr-only">T</span>he browser is not your enemy. It is the most
+                    sophisticated, accessible, internationalized runtime ever shipped &#x2014;
+                    available on devices your team does not own, in languages your designers do not
+                    speak, to users whose needs your product managers have not modeled.
+                  </p>
+                  <p>
+                    When you install a component library, a CSS&#x2011;in&#x2011;JS runtime, a
+                    meta&#x2011;framework&#x2019;s proprietary router, you are not escaping
+                    constraints. You are trading the browser&#x2019;s constraints &#x2014; which are
+                    well&#x2011;documented, stable, and standards&#x2011;governed &#x2014; for the
+                    constraints of a dependency maintained by a team smaller than your own, on a
+                    timeline you do not control, with breaking changes that arrive between your
+                    feature freeze and your deploy window.
+                  </p>
+                  <p>
+                    The platform is the constraint. That is not a problem to be solved. It is a
+                    condition to be understood and, when understood, exploited. Interoperability,
+                    resilience, progressive enhancement &#x2014; these are not academic ideals. They
+                    are what happens when you build for the platform instead of against it. The
+                    developers who feel limited by the browser are usually working against it. The
+                    ones who feel empowered by it have learned to read its grain.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============================================================
+             Page 2: Chapter II (front) / Chapter III (back)
+        ============================================================ -->
+        <article
+          class="page"
+          id="page-2"
+          data-page="2"
+          aria-label="Pages 5&#x2013;6 — Chapters II and III"
+          aria-hidden="true"
+          inert
+        >
+          <div class="page__front" aria-hidden="true">
+            <div
+              class="page__content"
+              id="chapter-ii"
+              data-running-head="Accessibility Is Architecture, Not Audit"
+            >
+              <article class="chapter">
+                <header class="chapter__header">
+                  <p class="chapter__num">Chapter II</p>
+                  <h2 class="chapter__title">Accessibility Is Architecture, Not Audit</h2>
+                  <div class="chapter__rule" aria-hidden="true"></div>
+                </header>
+                <div class="chapter__body">
+                  <p>
+                    <span class="dropcap" aria-hidden="true">A</span
+                    ><span class="sr-only">A</span> screen reader user navigating a
+                    single&#x2011;page application that manages focus incorrectly encounters a
+                    different page than you shipped. Technically the bytes are identical. The
+                    experience is not.
+                  </p>
+                  <p>
+                    Accessibility is not a checklist appended to a finished product. It is the
+                    residue of structural decisions made at the moment you decide what element to
+                    use, what order to place things in the DOM, where keyboard focus should go when
+                    a modal closes. You cannot retrofit a logical reading order onto a component
+                    hierarchy that was designed for visual layout alone. You cannot add meaningful
+                    landmark navigation to a page built from generic divs. These are architectural
+                    commitments.
+                  </p>
+                  <p>
+                    WCAG compliance that satisfies an automated scanner but fails a keyboard user is
+                    the front&#x2011;end equivalent of code that passes every unit test and crashes
+                    on the first real input. The unit of accessibility is not the audit finding. It
+                    is the interaction that succeeds or fails in the hands of someone who needs it
+                    to work.
+                  </p>
+                  <p>
+                    Build the structure first. Let the visual treatment follow. The two should never
+                    have been separated.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="page__back" aria-hidden="true">
+            <div
+              class="page__content"
+              id="chapter-iii"
+              data-running-head="CSS Has A Cascade For A Reason"
+            >
+              <article class="chapter">
+                <header class="chapter__header">
+                  <p class="chapter__num">Chapter III</p>
+                  <h2 class="chapter__title">CSS Has A Cascade For A Reason</h2>
+                  <div class="chapter__rule" aria-hidden="true"></div>
+                </header>
+                <div class="chapter__body">
+                  <p>
+                    <span class="dropcap" aria-hidden="true">T</span
+                    ><span class="sr-only">T</span>he specificity war is a symptom, not a root
+                    cause. When a team reaches for CSS Modules, CSS&#x2011;in&#x2011;JS, or
+                    utility&#x2011;class purging as a solution to &#x201C;CSS is
+                    unpredictable,&#x201D; they are usually diagnosing a culture problem &#x2014;
+                    too many authors, insufficient naming discipline, no architectural conventions
+                    &#x2014; as a language problem.
+                  </p>
+                  <p>
+                    The cascade and inheritance are features. They are how a browser answers the
+                    question &#x201C;what value should this property have, given everything the page
+                    knows about this element?&#x201D; Logical properties are part of the same
+                    commitment: <code>margin-inline-start</code> is not pedantry. It is an
+                    expression of authorial intent that survives a direction change, a locale
+                    switch, a writing&#x2011;mode experiment.
+                  </p>
+                  <p>
+                    The physical equivalent, <code>margin-left</code>, embeds an assumption about
+                    reading direction into the code &#x2014; an assumption that will be silently
+                    wrong the moment someone needs the opposite. Writing CSS with intentionality
+                    about specificity, inheritance, and logical properties is not sophistication for
+                    its own sake. It is the difference between code that expresses what you meant
+                    and code that happens to work until it doesn&#x2019;t.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============================================================
+             Page 3: Chapter IV (front) / Chapter V (back)
+        ============================================================ -->
+        <article
+          class="page"
+          id="page-3"
+          data-page="3"
+          aria-label="Pages 7&#x2013;8 — Chapters IV and V"
+          aria-hidden="true"
+          inert
+        >
+          <div class="page__front" aria-hidden="true">
+            <div class="page__content" id="chapter-iv" data-running-head="JavaScript Is Load">
+              <article class="chapter">
+                <header class="chapter__header">
+                  <p class="chapter__num">Chapter IV</p>
+                  <h2 class="chapter__title">JavaScript Is Load</h2>
+                  <div class="chapter__rule" aria-hidden="true"></div>
+                </header>
+                <div class="chapter__body">
+                  <p>
+                    <span class="dropcap" aria-hidden="true">E</span
+                    ><span class="sr-only">E</span>very line of JavaScript shipped to a browser has
+                    a cost that does not end at download. Parse, compile, execute &#x2014; three
+                    steps that happen on the user&#x2019;s device, on a CPU you have never profiled,
+                    in a memory environment your performance suite has never simulated.
+                  </p>
+                  <p>
+                    The difference between a 90 and a 60 Lighthouse performance score is rarely a
+                    missing optimization. It is JavaScript that should not have been shipped: a
+                    200&#x202F;KB component that renders two buttons and an icon, a
+                    client&#x2011;side routing layer for a site with four pages, a state management
+                    system for data that never changes.
+                  </p>
+                  <p>
+                    This is not an argument against JavaScript. It is an argument for measurement
+                    before commitment. Interactivity that requires JavaScript should require
+                    JavaScript. Everything else should not need to ask permission from a parser. The
+                    render&#x2011;blocking script, the hydration of a fully&#x2011;static page, the
+                    polyfill for a feature that shipped to 98&#x202F;percent of browsers two years
+                    ago &#x2014; these are debts paid by users who had nothing to do with the
+                    transaction.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="page__back" aria-hidden="true">
+            <div
+              class="page__content"
+              id="chapter-v"
+              data-running-head="Performance Is A Feature For Someone Else"
+            >
+              <article class="chapter">
+                <header class="chapter__header">
+                  <p class="chapter__num">Chapter V</p>
+                  <h2 class="chapter__title">Performance Is A Feature For Someone Else</h2>
+                  <div class="chapter__rule" aria-hidden="true"></div>
+                </header>
+                <div class="chapter__body">
+                  <p>
+                    <span class="dropcap" aria-hidden="true">P</span
+                    ><span class="sr-only">P</span>erformance optimization is not a neutral
+                    technical exercise. The users who benefit most from a two&#x2011;second
+                    reduction in time&#x2011;to&#x2011;interactive are users on low&#x2011;end
+                    devices, congested mobile networks, and constrained data plans. These
+                    demographics are systematically underrepresented in the room when performance
+                    budgets are set.
+                  </p>
+                  <p>
+                    When a team decides a six&#x2011;megabyte JavaScript bundle is
+                    &#x201C;acceptable&#x201D; because their office laptop renders it in
+                    800&#x202F;milliseconds, they have made a policy decision about whose experience
+                    counts, dressed up as a technical one. They are not wrong that it works. They
+                    are wrong about who gets to be the user.
+                  </p>
+                  <p>
+                    <code>font-display:&#x202F;swap</code> exists because a user on a 3G connection
+                    should not see an invisible page while a font loads. Image lazy&#x2011;loading
+                    exists because a user on a metered plan should not pay for images they never
+                    scroll to. These are not nice&#x2011;to&#x2011;haves. They are the
+                    front&#x2011;end equivalent of accessible ramps &#x2014; features that feel
+                    optional until they are the only way in.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============================================================
+             Page 4: Chapter VI (front) / Colophon (back)
+        ============================================================ -->
+        <article
+          class="page"
+          id="page-4"
+          data-page="4"
+          aria-label="Pages 9&#x2013;10 — Chapter VI and Colophon"
+          aria-hidden="true"
+          inert
+        >
+          <div class="page__front" aria-hidden="true">
+            <div class="page__content" id="chapter-vi" data-running-head="Make It Boring">
+              <article class="chapter">
+                <header class="chapter__header">
+                  <p class="chapter__num">Chapter VI</p>
+                  <h2 class="chapter__title">Make It Boring</h2>
+                  <div class="chapter__rule" aria-hidden="true"></div>
+                </header>
+                <div class="chapter__body">
+                  <p>
+                    <span class="dropcap" aria-hidden="true">T</span
+                    ><span class="sr-only">T</span>he highest compliment paid to an infrastructure
+                    engineer is that nobody talks about their work. The best CSS architecture is the
+                    one the next developer does not need explained. The most effective state
+                    management system is the one that never appears in a post&#x2011;mortem.
+                  </p>
+                  <p>
+                    Craft expressed as simplicity is harder than craft expressed as complexity, and
+                    it is worth more. This book is a deliberate counterexample &#x2014; an exercise
+                    in visible technique, in making the mechanism the point &#x2014; constructed in
+                    full awareness that the right answer, most of the time, is to make the mechanism
+                    invisible.
+                  </p>
+                  <p>
+                    The page turn you are watching is a CSS <code>@keyframes</code> animation on a
+                    <code>rotateY</code> transform with a midpoint z&#x2011;index swap and a shadow
+                    sweep driven by an animatable custom property. You are not supposed to be
+                    thinking about that. The fact that you might be is a failure of this
+                    project&#x2019;s stated purpose and, also, intentional. Some demonstrations need
+                    to show the seams to be legible as demonstrations. The rest of the time: make it
+                    boring.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="page__back" aria-hidden="true">
+            <div class="page__content page__content--colophon">
+              <div class="colophon">
+                <h2 class="colophon__heading">Colophon</h2>
+                <div class="colophon__rule" aria-hidden="true"></div>
+                <div class="colophon__body">
+                  <p>
+                    Set in <em>EB Garamond</em> for body text, <em>Cinzel</em> for chapter display
+                    headings, and <em>Uncial Antiqua</em> for the cover title. Typefaces sourced
+                    from Google Fonts.
+                  </p>
+                  <p>
+                    Paper texture rendered via layered CSS
+                    <code>repeating-linear-gradient</code> declarations, without image assets. The
+                    wood&#x2011;grain environment is pure CSS.
+                  </p>
+                  <p>
+                    Page&#x2011;turn animation achieved through CSS 3D transforms &#x2014;
+                    <code>rotateY()</code> on a <code>preserve-3d</code> context &#x2014; with an
+                    animatable <code>@property</code> for the shadow sweep. Navigation state managed
+                    by a vanilla ES module state machine. No external JavaScript dependencies at
+                    runtime.
+                  </p>
+                  <p>Deployed on Netlify.</p>
+                </div>
+                <div class="colophon__attribution">
+                  <p>Written and built by Tom DeLuca</p>
+                  <p class="colophon__year">MMXXVI</p>
+                </div>
+                <div class="colophon__ornament" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 60 24"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    width="60"
+                    height="24"
+                  >
+                    <path
+                      d="M30 6 C22 6 14 11 14 14 C14 17 22 22 30 22 C38 22 46 17 46 14 C46 11 38 6 30 6Z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="0.75"
+                    />
+                    <ellipse cx="30" cy="14" rx="8" ry="5" fill="currentColor" opacity="0.2" />
+                    <circle cx="30" cy="14" r="2" fill="currentColor" />
+                    <line
+                      x1="0"
+                      y1="14"
+                      x2="10"
+                      y2="14"
+                      stroke="currentColor"
+                      stroke-width="0.75"
+                    />
+                    <line
+                      x1="50"
+                      y1="14"
+                      x2="60"
+                      y2="14"
+                      stroke="currentColor"
+                      stroke-width="0.75"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============================================================
+             Page 5: Author's Note (front) / Endpaper (back)
+        ============================================================ -->
+        <article
+          class="page"
+          id="page-5"
+          data-page="5"
+          aria-label="Pages 11&#x2013;12 — Author&#x2019;s Note"
+          aria-hidden="true"
+          inert
+        >
+          <div class="page__front" aria-hidden="true">
+            <div class="page__content page__content--author-note">
+              <div class="author-note">
+                <h2 class="author-note__heading">Author&#x2019;s Note</h2>
+                <div class="author-note__rule" aria-hidden="true"></div>
+                <div class="author-note__body">
+                  <p>
+                    The six chapters in this book were written as a single argument: that the
+                    browser platform, approached with rigor and honesty, is sufficient for the work
+                    most of us are actually doing.
+                  </p>
+                  <p>
+                    The CSS, the JavaScript, and the structure of this page are a demonstration in
+                    miniature of that argument &#x2014; or an attempt at one. The page turn is a CSS
+                    <code>@keyframes</code>
+                    animation. The state machine is a vanilla ES module. The paper texture is a
+                    stack of
+                    <code>repeating-linear-gradient</code> calls. The whole thing runs without a
+                    build step or a runtime dependency.
+                  </p>
+                  <p>
+                    Whether this constitutes craft or indulgence is a question I leave to the
+                    reader. Probably both.
+                  </p>
+                  <p>No content in this book is placeholder copy. The writing is the project.</p>
+                </div>
+                <div class="author-note__ornament" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 120 8"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    width="120"
+                    height="8"
+                  >
+                    <line x1="0" y1="4" x2="52" y2="4" stroke="currentColor" stroke-width="0.5" />
+                    <circle cx="60" cy="4" r="2.5" fill="currentColor" />
+                    <line x1="68" y1="4" x2="120" y2="4" stroke="currentColor" stroke-width="0.5" />
+                  </svg>
+                </div>
+                <p class="author-note__attribution">&#x2014; Tom DeLuca, MMXXVI</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="page__back page__back--endpaper" aria-hidden="true">
+            <div class="page__content page__content--blank"></div>
+          </div>
+        </article>
+
+        <!-- Corner navigation (pointer-device affordance; tabindex="-1" keeps off keyboard tab order) -->
+        <button
+          class="corner-btn corner-btn--next"
+          type="button"
+          aria-label="Turn to next page"
+          tabindex="-1"
+        >
+          <span class="corner-btn__fold" aria-hidden="true"></span>
+        </button>
+        <button
+          class="corner-btn corner-btn--prev"
+          type="button"
+          aria-label="Turn to previous page"
+          tabindex="-1"
+          hidden
+        >
+          <span class="corner-btn__fold" aria-hidden="true"></span>
+        </button>
+      </div>
+    </main>
+
+    <!-- Navigation controls — always keyboard accessible -->
+    <nav class="book-controls" id="book-controls" aria-label="Book navigation">
+      <button
+        class="ctrl-btn ctrl-btn--prev"
+        type="button"
+        id="btn-prev"
+        aria-label="Previous spread"
+        disabled
+      >
+        <svg
+          class="ctrl-btn__icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          width="20"
+          height="20"
+        >
+          <path
+            d="M15 18L9 12L15 6"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+
+      <div class="ctrl-folio" role="status" id="folio-label" aria-live="polite" aria-atomic="true">
+        Cover
+      </div>
+
+      <button class="ctrl-btn ctrl-btn--next" type="button" id="btn-next" aria-label="Next spread">
+        <svg
+          class="ctrl-btn__icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          width="20"
+          height="20"
+        >
+          <path
+            d="M9 18L15 12L9 6"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </nav>
+
+    <p class="keyboard-hint" aria-hidden="true">
+      Use <kbd>&#x2190;</kbd> <kbd>&#x2192;</kbd> arrow keys or click corners to turn pages
+    </p>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

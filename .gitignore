@@ -427,3 +427,15 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Node / npm
+package-lock.json
+
+# Tool caches
+.eslintcache
+.stylelintcache
+.prettiercache
+
+# Lighthouse reports
+lh-report.json
+*.lh-report.json

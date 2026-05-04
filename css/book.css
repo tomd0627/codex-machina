@@ -1,0 +1,124 @@
+/* ── Book stage: perspective context ── */
+.book-stage {
+  align-items: center;
+  display: flex;
+  inline-size: 100%;
+  justify-content: center;
+  perspective: 2500px;
+  perspective-origin: 50% 44%;
+}
+
+/* ── Book container ── */
+.book {
+  block-size: var(--book-height);
+  box-shadow: var(--book-shadow-soft), var(--book-shadow-contact);
+  inline-size: var(--book-width);
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* ── Static left half: back cover / endpaper ──
+   Visible at spread 0. Covered by verso pages when book is opened. */
+.book__back-cover {
+  background-color: var(--cover-bg);
+  block-size: 100%;
+  inline-size: 50%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  overflow: hidden;
+  position: absolute;
+}
+
+.book__endpaper {
+  background-color: var(--endpaper-bg);
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      var(--endpaper-pattern),
+      var(--endpaper-pattern) 1px,
+      transparent 1px,
+      transparent 12px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      var(--endpaper-pattern),
+      var(--endpaper-pattern) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  block-size: 100%;
+  inline-size: 100%;
+  opacity: 0.7;
+}
+
+/* ── Spine ── */
+.book__spine {
+  align-items: center;
+  background: linear-gradient(
+    to right,
+    var(--spine-color),
+    var(--spine-highlight) 40%,
+    var(--spine-color) 70%,
+    #0d0905
+  );
+  block-size: 100%;
+  border-inline-end: 1px solid rgb(0 0 0 / 40%);
+  border-inline-start: 1px solid rgb(0 0 0 / 40%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  inline-size: var(--spine-width);
+  inset-block-start: 0;
+  inset-inline-start: calc(50% - var(--spine-width) / 2);
+  justify-content: center;
+  overflow: hidden;
+  position: absolute;
+  z-index: 5;
+}
+
+/* Headband stripes at top and bottom of spine */
+.book__spine::before,
+.book__spine::after {
+  background: repeating-linear-gradient(
+    to right,
+    var(--headband-a),
+    var(--headband-a) 3px,
+    var(--headband-b) 3px,
+    var(--headband-b) 6px
+  );
+  block-size: 4px;
+  content: "";
+  inline-size: 100%;
+  position: absolute;
+}
+
+.book__spine::before {
+  inset-block-start: 0;
+}
+
+.book__spine::after {
+  inset-block-end: 0;
+}
+
+.book__spine-title,
+.book__spine-author {
+  color: var(--spine-text);
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+  transform: rotate(90deg);
+  white-space: nowrap;
+}
+
+.book__spine-title {
+  font-size: 0.5625rem;
+  font-weight: 500;
+}
+
+.book__spine-author {
+  font-size: 0.4375rem;
+  opacity: 0.65;
+}

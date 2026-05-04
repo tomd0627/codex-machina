@@ -1,0 +1,120 @@
+/* ── Navigation controls bar ── */
+.book-controls {
+  align-items: center;
+  background: var(--ctrl-bg);
+  border: 1px solid var(--ctrl-border);
+  border-radius: 8px;
+  display: flex;
+  gap: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* ── Prev / Next buttons ── */
+.ctrl-btn {
+  align-items: center;
+  background: transparent;
+  block-size: 44px;
+  border: none;
+  color: var(--ctrl-text);
+  cursor: pointer;
+  display: flex;
+  inline-size: 44px;
+  justify-content: center;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.ctrl-btn:disabled {
+  color: var(--ctrl-disabled);
+  cursor: not-allowed;
+}
+
+.ctrl-btn:focus-visible {
+  background: var(--ctrl-hover-bg);
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: -2px;
+}
+
+.ctrl-btn:hover:not(:disabled) {
+  background: var(--ctrl-hover-bg);
+}
+
+.ctrl-btn__icon {
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* ── Folio label ── */
+.ctrl-folio {
+  border-inline: 1px solid var(--ctrl-border);
+  color: var(--ctrl-text);
+  font-family: var(--font-display);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  min-inline-size: 8rem;
+  padding-block: 0.5em;
+  padding-inline: 1em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── Corner navigation buttons ──
+   Purely visual / pointer affordance; tabindex="-1" */
+.corner-btn {
+  block-size: 80px;
+  inline-size: 80px;
+  position: absolute;
+  z-index: 20;
+}
+
+.corner-btn--next {
+  cursor: e-resize;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+}
+
+.corner-btn--prev {
+  cursor: w-resize;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+}
+
+.corner-btn__fold {
+  block-size: 0;
+  inline-size: 0;
+  position: absolute;
+  transition: border-width 0.18s ease;
+}
+
+.corner-btn--next .corner-btn__fold {
+  border-block-end: 0 solid var(--chapter-rule);
+  border-inline-start: 0 solid transparent;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+}
+
+.corner-btn--prev .corner-btn__fold {
+  border-block-end: 0 solid var(--chapter-rule);
+  border-inline-end: 0 solid transparent;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+}
+
+.corner-btn--next:hover .corner-btn__fold {
+  border-block-end-width: 28px;
+  border-inline-start-width: 28px;
+}
+
+.corner-btn--prev:hover .corner-btn__fold {
+  border-block-end-width: 28px;
+  border-inline-end-width: 28px;
+}
+
+.corner-btn:focus-visible {
+  border-radius: 0;
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: -3px;
+}

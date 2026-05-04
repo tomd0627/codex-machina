@@ -1,0 +1,2 @@
+# Single-page static site — no routing needed.
+# 404s fall through to Netlify's default 404 page.

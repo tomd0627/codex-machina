@@ -1,0 +1,203 @@
+/* ── Page base: all pages stacked at spine, invisible by default ── */
+.page {
+  block-size: 100%;
+  inline-size: 50%;
+  inset-block-start: 0;
+  inset-inline-start: 50%;
+  position: absolute;
+  transform: rotateY(0deg);
+  transform-origin: 0% 50%;
+  transform-style: preserve-3d;
+  visibility: hidden;
+  z-index: 1;
+}
+
+/* ── Current recto page: visible on the right ── */
+.page[data-state="recto"] {
+  box-shadow: var(--page-shadow-inner);
+  visibility: visible;
+  z-index: 4;
+}
+
+/* ── Current verso page: flipped to the left ── */
+.page[data-state="verso"] {
+  box-shadow: var(--page-shadow-inner-verso);
+  transform: rotateY(-180deg);
+  visibility: visible;
+  z-index: 3;
+}
+
+/* ── Staged: about to become visible during a turn ── */
+.page[data-state="staged"] {
+  visibility: visible;
+  z-index: 2;
+}
+
+/* ── Turning states: handled by animation.css @keyframes ── */
+.page[data-state="turning-forward"],
+.page[data-state="turning-backward"] {
+  visibility: visible;
+  z-index: 10;
+}
+
+/* ── Foreground override during midpoint z-index swap ── */
+.page.page--foreground {
+  z-index: 10;
+}
+
+/* ── Page faces ── */
+.page__front,
+.page__back {
+  backface-visibility: hidden;
+  block-size: 100%;
+  inline-size: 100%;
+  inset: 0;
+  overflow: hidden;
+  position: absolute;
+}
+
+/* ── Paper texture via layered CSS gradients ──
+   Intentionally a second .page__front/.page__back block: structure above, texture here. */
+/* stylelint-disable-next-line no-duplicate-selectors */
+.page__front,
+.page__back {
+  background-color: var(--page-bg);
+  background-image:
+    repeating-linear-gradient(
+      12deg,
+      transparent,
+      transparent 3px,
+      rgb(180 158 118 / 4%) 3px,
+      rgb(180 158 118 / 4%) 4px
+    ),
+    repeating-linear-gradient(
+      168deg,
+      transparent,
+      transparent 4px,
+      rgb(140 115 78 / 3%) 4px,
+      rgb(140 115 78 / 3%) 5px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 8px,
+      rgb(160 135 90 / 2%) 8px,
+      rgb(160 135 90 / 2%) 9px
+    ),
+    linear-gradient(
+      to bottom,
+      rgb(255 255 255 / 4%) 0%,
+      transparent 15%,
+      transparent 85%,
+      rgb(0 0 0 / 3%) 100%
+    );
+}
+
+/* ── Back face: pre-rotated so it shows when parent is at -180deg ── */
+.page__back {
+  transform: rotateY(180deg);
+}
+
+/* ── Suppress events on the hidden face ──
+   Firefox does not honour backface-visibility: hidden for pointer events,
+   so the invisible back face intercepts wheel events on the recto page. */
+.page[data-state="recto"] .page__back,
+.page[data-state="verso"] .page__front {
+  pointer-events: none;
+}
+
+/* ── Verso page back face uses slightly cooler paper ── */
+.page[data-state="verso"] .page__front {
+  background-color: var(--page-bg-verso);
+}
+
+/* ── Cover page: dark background ── */
+.page__front--cover {
+  background-color: var(--cover-bg);
+  background-image:
+    repeating-linear-gradient(
+      30deg,
+      transparent,
+      transparent 6px,
+      rgb(255 255 255 / 1%) 6px,
+      rgb(255 255 255 / 1%) 7px
+    ),
+    linear-gradient(
+      160deg,
+      rgb(255 255 255 / 4%) 0%,
+      transparent 40%,
+      transparent 70%,
+      rgb(0 0 0 / 20%) 100%
+    );
+  color: var(--cover-text);
+}
+
+/* ── Endpaper back face ── */
+.page__back--endpaper {
+  background-color: var(--endpaper-bg);
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      var(--endpaper-pattern),
+      var(--endpaper-pattern) 1px,
+      transparent 1px,
+      transparent 12px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      var(--endpaper-pattern),
+      var(--endpaper-pattern) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+}
+
+/* ── Page content: inner padding and scrollable overflow ── */
+.page__content {
+  block-size: 100%;
+  inline-size: 100%;
+  overflow-block: auto;
+  padding-block: 2.75rem;
+  padding-inline: 2.5rem;
+  scrollbar-color: var(--chapter-rule) transparent;
+  scrollbar-width: thin;
+}
+
+.page__content--frontispiece {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.page__content--colophon,
+.page__content--author-note {
+  padding-block: 3rem;
+  padding-inline: 2.75rem;
+}
+
+.page__content--blank {
+  background: transparent;
+}
+
+/* ── Running head / folio (decorative, screen-only) ── */
+.page__content::before {
+  color: var(--ink-muted);
+  content: attr(data-running-head);
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  margin-block-end: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.page__content--frontispiece::before,
+.page__content--blank::before,
+.page__content--cover::before,
+.page__content--toc::before,
+.page__content--colophon::before,
+.page__content--author-note::before {
+  content: none;
+}

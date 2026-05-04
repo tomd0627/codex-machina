@@ -1,0 +1,39 @@
+html {
+  color-scheme: dark;
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  align-items: center;
+  background-color: var(--env-bg);
+  color: var(--ink-primary);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-body);
+  gap: 1.5rem;
+  justify-content: center;
+  min-block-size: 100dvb;
+  overflow-inline: hidden;
+  padding-block: 3rem;
+}
+
+/* ── Keyboard navigation hint ── */
+.keyboard-hint {
+  color: rgb(201 185 122 / 32%);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-align: center;
+  user-select: none;
+}
+
+.keyboard-hint kbd {
+  background: rgb(255 255 255 / 6%);
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 3px;
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  padding-block: 0.1em;
+  padding-inline: 0.35em;
+}

@@ -1,0 +1,160 @@
+/* ── Tablet: 768px–1100px ──
+   Full two-page spread but constrained to viewport width. */
+@media (768px <= width <= 1100px) {
+  :root {
+    --book-width: min(900px, 94vw);
+    --book-height: calc(var(--book-width) * 0.696);
+    --page-width: calc(var(--book-width) / 2);
+  }
+
+  .book-stage {
+    perspective: clamp(1200px, 180vw, 2500px);
+  }
+}
+
+/* ── Small tablet / large phone: 480px–767px ──
+   Transition zone: single-page scroll begins here. */
+@media (480px <= width <= 767px) {
+  :root {
+    --book-width: 100vw;
+    --book-height: auto;
+  }
+
+  body {
+    padding-block: 1.5rem;
+  }
+}
+
+/* ── Mobile: < 768px ──
+   The 3D book experience is replaced with a linear scroll layout.
+   This is an intentional alternative, not a degraded experience. */
+@media (width < 768px) {
+  /* Disable 3D perspective; constrain width for comfortable reading */
+  .book-stage {
+    align-items: stretch;
+    inline-size: 100%;
+    max-inline-size: 540px;
+    padding-inline: 1rem;
+    perspective: none;
+  }
+
+  .book {
+    block-size: auto;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+    transform-style: flat;
+  }
+
+  /* Hide the 3D environment elements */
+  .book__back-cover,
+  .book__spine,
+  .corner-btn {
+    display: none;
+  }
+
+  /* All pages become static, visible, stacked vertically */
+  .page {
+    block-size: auto;
+    display: block;
+    inline-size: 100%;
+    inset-block-start: unset;
+    inset-inline-start: unset;
+    position: static;
+    /* stylelint-disable-next-line declaration-no-important */
+    transform: none !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    visibility: visible !important;
+  }
+
+  /* Both faces of each page visible sequentially; card shadow replaces 3D shadow */
+  .page__front,
+  .page__back {
+    backface-visibility: visible;
+    block-size: auto;
+    box-shadow: 0 4px 20px rgb(0 0 0 / 32%);
+    display: block;
+    margin-block-end: 1px;
+    min-block-size: 60vb;
+    overflow: visible;
+    position: static;
+    /* stylelint-disable-next-line declaration-no-important */
+    transform: none !important;
+  }
+
+  /* Cover styling preserved */
+  .page__front--cover {
+    min-block-size: 70vb;
+  }
+
+  .page__content {
+    overflow-block: visible;
+    padding-block: 2.5rem;
+    padding-inline: 1.5rem;
+  }
+
+  /* Mobile: hide nav bar — content is a scroll, buttons are irrelevant */
+  .book-controls {
+    display: none;
+  }
+
+  /* Disable 3D animations on mobile */
+  .page[data-state="turning-forward"],
+  .page[data-state="turning-backward"] {
+    animation: none;
+  }
+
+  /* Environment: simpler dark background */
+  body::before {
+    background: var(--env-bg);
+    background-image: none;
+  }
+
+  body {
+    align-items: center;
+    gap: 1rem;
+    padding-block: 1.5rem;
+  }
+
+  /* Endpaper: hide on mobile (blank page is noise) */
+  .page__back--endpaper {
+    display: none;
+  }
+
+  /* Drop cap: reduce size on mobile */
+  .dropcap {
+    font-size: 2.5em;
+  }
+
+  /* Chapter content: slightly smaller text */
+  .chapter__body {
+    font-size: 0.9375rem;
+    text-align: start;
+  }
+
+  /* Keyboard hint hidden on mobile (no keyboard) */
+  .keyboard-hint {
+    display: none;
+  }
+}
+
+/* ── Very small screens: < 375px ── */
+@media (width < 375px) {
+  .page__content {
+    padding-block: 2rem;
+    padding-inline: 1.125rem;
+  }
+
+  .chapter__body {
+    font-size: 0.875rem;
+  }
+}
+
+/* ── Large desktop: > 1400px ──
+   Book centered with more environment visible around it. */
+@media (width > 1400px) {
+  body {
+    padding-block: 4rem;
+  }
+}

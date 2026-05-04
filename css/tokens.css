@@ -1,0 +1,71 @@
+:root {
+  /* ── Book dimensions ── */
+  --book-width: 920px;
+  --book-height: 640px;
+  --page-width: 460px;
+  --spine-width: 22px;
+
+  /* ── Book interior: paper ── */
+  --page-bg: #f7f3e9;
+  --page-bg-verso: #f4efdf;
+  --page-texture-1: #ede8d4;
+  --page-texture-2: #e8e2cc;
+
+  /* ── Book interior: ink ── */
+  --ink-primary: #1a1610;
+  --ink-secondary: #3d3529;
+  --ink-muted: #6b5f4e;
+  --ink-accent: #8c1a0a;
+  --chapter-rule: #c9b97a;
+  --dropcap-bg: #1a1610;
+  --dropcap-fg: #f7f3e9;
+
+  /* ── Book cover ── */
+  --cover-bg: #130f0a;
+  --cover-text: #e8dfc8;
+  --cover-accent: #c9b97a;
+  --cover-subtitle: #9c8f74;
+
+  /* ── Book binding ── */
+  --spine-color: #1a1005;
+  --spine-highlight: #3d2e18;
+  --spine-text: #c9b97a;
+  --headband-a: #8c1a0a;
+  --headband-b: #c9b97a;
+  --endpaper-bg: #2a1e12;
+  --endpaper-pattern: #221810;
+
+  /* ── Environment: scene ── */
+  --env-bg: #1c1713;
+  --env-surface: #2d241c;
+  --env-grain-1: #251e16;
+  --env-grain-2: #342b22;
+  --env-ambient: rgb(255 248 220 / 6%);
+
+  /* ── Shadows ── */
+  --book-shadow-soft: 0 28px 80px rgb(0 0 0 / 72%);
+  --book-shadow-contact: 0 3px 10px rgb(0 0 0 / 88%);
+  --page-shadow-inner: inset -14px 0 28px rgb(0 0 0 / 16%);
+  --page-shadow-inner-verso: inset 14px 0 28px rgb(0 0 0 / 10%);
+
+  /* ── Navigation controls ── */
+  --ctrl-bg: rgb(28 23 19 / 82%);
+  --ctrl-border: rgb(201 185 122 / 22%);
+  --ctrl-text: #c9b97a;
+  --ctrl-hover-bg: rgb(201 185 122 / 14%);
+  --ctrl-disabled: rgb(201 185 122 / 28%);
+  --focus-ring-color: #c9b97a;
+  --focus-ring: 0 0 0 2px var(--focus-ring-color);
+
+  /* ── Typography ── */
+  --font-body: "EB Garamond", "Garamond", "Times New Roman", serif;
+  --font-display: "Cinzel", "Trajan Pro", "Times New Roman", serif;
+  --font-cover: "Uncial Antiqua", "Times New Roman", serif;
+  --font-ui: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+
+  /* ── Animation ── */
+  --turn-duration: 650ms;
+  --turn-easing: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  --turn-midpoint: 325ms;
+}

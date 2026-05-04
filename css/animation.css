@@ -1,0 +1,104 @@
+/* ── Animatable custom property for shadow sweep ──
+   Progressive enhancement: browsers without @property support
+   degrade gracefully (no shadow sweep, but turn still works). */
+@property --shadow-pos {
+  inherits: false;
+  initial-value: 100%;
+  syntax: "<percentage>";
+}
+
+/* ── Forward page turn: 0deg → -180deg ── */
+.page[data-state="turning-forward"] {
+  animation: page-turn-forward var(--turn-duration) var(--turn-easing) forwards;
+}
+
+@keyframes page-turn-forward {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+
+/* ── Backward page turn: -180deg → 0deg ── */
+.page[data-state="turning-backward"] {
+  animation: page-turn-backward var(--turn-duration) var(--turn-easing) forwards;
+}
+
+@keyframes page-turn-backward {
+  0% {
+    transform: rotateY(-180deg);
+  }
+
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+/* ── Shadow sweep overlay on the turning page face ──
+   Simulates the page curving away from the reader. */
+.page[data-state="turning-forward"] .page__front::after,
+.page[data-state="turning-backward"] .page__back::after {
+  animation: shadow-sweep-forward var(--turn-duration) var(--turn-easing) forwards;
+  background: radial-gradient(
+    ellipse at var(--shadow-pos) 50%,
+    rgb(0 0 0 / 28%) 0%,
+    transparent 68%
+  );
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+@keyframes shadow-sweep-forward {
+  0% {
+    --shadow-pos: 96%;
+
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  50% {
+    --shadow-pos: 52%;
+  }
+
+  100% {
+    --shadow-pos: 8%;
+
+    opacity: 0;
+  }
+}
+
+/* ── Reduced-motion fallback: simple cross-fade ──
+   No 3D transforms; just opacity and a gentle vertical offset. */
+@media (prefers-reduced-motion: reduce) {
+  .page[data-state="turning-forward"],
+  .page[data-state="turning-backward"] {
+    animation: page-fade-in 200ms ease forwards;
+  }
+
+  @keyframes page-fade-in {
+    from {
+      opacity: 0;
+      translate: 0 -6px;
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  .page[data-state="turning-forward"] .page__front::after,
+  .page[data-state="turning-backward"] .page__back::after {
+    animation: none;
+    content: none;
+  }
+}

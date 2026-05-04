@@ -1,0 +1,77 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  text-size-adjust: 100%;
+}
+
+body {
+  min-block-size: 100dvb;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-inline-size: 100%;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring-color, #c9b97a);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  block-size: 1px;
+  clip-path: inset(50%);
+  inline-size: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.skip-link {
+  background: var(--ctrl-bg, #1c1713);
+  block-size: auto;
+  clip-path: none;
+  color: var(--ctrl-text, #c9b97a);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  inline-size: auto;
+  inset-block-start: 0;
+  inset-inline-start: 50%;
+  overflow: visible;
+  padding-block: 0.5em;
+  padding-inline: 1em;
+  position: fixed;
+  transform: translateX(-50%) translateY(-120%);
+  transition: transform 0.2s;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  transform: translateX(-50%) translateY(0.5rem);
+}

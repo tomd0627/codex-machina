@@ -1,0 +1,4 @@
+node_modules/
+package-lock.json
+*.lh-report.json
+lh-report.json

@@ -1,0 +1,33 @@
+/* ── Scene background: walnut table surface ── */
+body::before {
+  background-color: var(--env-surface);
+  background-image:
+    repeating-linear-gradient(
+      89deg,
+      transparent,
+      transparent 14px,
+      var(--env-grain-1) 14px,
+      var(--env-grain-1) 15px
+    ),
+    repeating-linear-gradient(
+      87deg,
+      transparent,
+      transparent 28px,
+      var(--env-grain-2) 28px,
+      var(--env-grain-2) 30px
+    ),
+    repeating-linear-gradient(
+      91deg,
+      transparent,
+      transparent 6px,
+      rgb(0 0 0 / 8%) 6px,
+      rgb(0 0 0 / 8%) 7px
+    ),
+    radial-gradient(ellipse 80% 60% at 50% 42%, var(--env-ambient) 0%, transparent 100%);
+  block-size: 100%;
+  content: "";
+  inline-size: 100%;
+  inset: 0;
+  position: fixed;
+  z-index: -1;
+}
